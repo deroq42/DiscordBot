@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class CommandManager {
 
-    private final Map<String, InternalCommand> internalCommandHashMap;
-    private final Map<String, ModuleCommand> moduleCommandHashMap;
+    private final Map<String, InternalCommand> internalCommandMap;
+    private final Map<String, ModuleCommand> moduleCommandMap;
 
     public CommandManager() {
-        this.internalCommandHashMap = new HashMap<>();
-        this.moduleCommandHashMap = new HashMap<>();
+        this.internalCommandMap = new HashMap<>();
+        this.moduleCommandMap = new HashMap<>();
     }
 
     /**
@@ -21,7 +21,7 @@ public class CommandManager {
      * @param command the class of the command.
      */
     public void registerCommand(String commandName, InternalCommand command) {
-        internalCommandHashMap.put(commandName, command);
+        internalCommandMap.put(commandName, command);
     }
 
     /**
@@ -31,7 +31,7 @@ public class CommandManager {
      * @param command the class of the command.
      */
     public void registerCommand(String commandName, ModuleCommand command) {
-        moduleCommandHashMap.put(commandName, command);
+        moduleCommandMap.put(commandName, command);
     }
 
     /**
@@ -41,7 +41,7 @@ public class CommandManager {
      * @return an InternalCommand by its name.
      */
     public InternalCommand getInternalCommand(String commandName) {
-        return internalCommandHashMap.get(commandName);
+        return internalCommandMap.get(commandName);
     }
 
     /**
@@ -51,7 +51,7 @@ public class CommandManager {
      * @return an ModuleCommand by its name.
      */
     public ModuleCommand getModuleCommand(String commandName) {
-        return moduleCommandHashMap.get(commandName);
+        return moduleCommandMap.get(commandName);
     }
 
     /**
@@ -61,7 +61,7 @@ public class CommandManager {
      * @return true if it is in the commandMap.
      */
     public boolean existsInternalCommand(String commandName) {
-        return internalCommandHashMap.containsKey(commandName);
+        return internalCommandMap.containsKey(commandName);
     }
 
     /**
@@ -71,7 +71,7 @@ public class CommandManager {
      * @return true if it is in the commandMap.
      */
     public boolean existsModuleCommand(String commandName) {
-        return moduleCommandHashMap.containsKey(commandName);
+        return moduleCommandMap.containsKey(commandName);
     }
 
     /**
@@ -80,7 +80,7 @@ public class CommandManager {
      * @return a Map with the commandName as key and the InternalCommand as value.
      */
     public Map<String, InternalCommand> getInternalCommandMap() {
-        return internalCommandHashMap;
+        return internalCommandMap;
     }
 
     /**
@@ -89,7 +89,7 @@ public class CommandManager {
      * @return a Map with the commandName as key and the ModuleCommand as value.
      */
     public Map<String, ModuleCommand> getModuleCommandMap() {
-        return moduleCommandHashMap;
+        return moduleCommandMap;
     }
 
     /**
