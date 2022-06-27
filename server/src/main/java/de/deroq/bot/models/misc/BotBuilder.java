@@ -1,4 +1,4 @@
-package de.deroq.bot.models.builders;
+package de.deroq.bot.models.misc;
 
 import de.deroq.bot.models.Bot;
 import net.dv8tion.jda.api.OnlineStatus;

@@ -7,7 +7,7 @@ import de.deroq.bot.listeners.MessageReceivedListener;
 import de.deroq.bot.listeners.protocol.PacketListener;
 import de.deroq.bot.modules.ModuleManager;
 import de.deroq.bot.models.Bot;
-import de.deroq.bot.models.builders.BotBuilder;
+import de.deroq.bot.models.misc.BotBuilder;
 import de.deroq.bot.modules.fun.FunModule;
 import de.deroq.bot.modules.moderation.ModerationModule;
 import de.deroq.bot.modules.verify.VerifyModule;

@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class CommandManager {
+public class CommandHandler {
 
     private final Map<String, InternalCommand> internalCommandMap;
     private final Map<String, ModuleCommand> moduleCommandMap;
 
-    public CommandManager() {
+    public CommandHandler() {
         this.internalCommandMap = new HashMap<>();
         this.moduleCommandMap = new HashMap<>();
     }
