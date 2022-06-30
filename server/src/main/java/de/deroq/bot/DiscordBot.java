@@ -31,7 +31,8 @@ public class DiscordBot {
         DiscordBot discordBot = new DiscordBot();
 
         discordBot.initBot();
-        discordBot.makeInstances();
+        discordBot.initManagers();
+        discordBot.initNetty();
         discordBot.registerModules();
         discordBot.registerInternalCommands();
         discordBot.registerModuleCommands();
@@ -52,13 +53,15 @@ public class DiscordBot {
         bot.run();
     }
 
-    private void makeInstances() {
+    private void initManagers() {
         this.fileManager = new FileManager();
         this.moduleManager = new ModuleManager();
         this.commandManager = new CommandManager();
         this.packetListener = new PacketListener(this);
         this.serverNettyBootstrap = new ServerNettyBootstrap(8000, packetListener);
+    }
 
+    private void initNetty() {
         new Thread(() -> serverNettyBootstrap.run()).start();
     }
 
