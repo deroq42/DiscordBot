@@ -1,4 +1,4 @@
-package de.deroq.bot.models;
+package de.deroq.bot.config;
 
 public abstract class Config {
 

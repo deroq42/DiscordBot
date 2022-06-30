@@ -1,9 +1,8 @@
 package de.deroq.bot.config;
 
-import de.deroq.bot.models.configs.RolesConfig;
+import de.deroq.bot.config.models.RolesConfig;
 import com.google.gson.Gson;
-import de.deroq.bot.models.configs.ChannelsConfig;
-import de.deroq.bot.models.Config;
+import de.deroq.bot.config.models.ChannelsConfig;
 
 import java.io.*;
 import java.util.Arrays;

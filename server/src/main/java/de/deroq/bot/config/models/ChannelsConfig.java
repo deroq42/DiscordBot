@@ -1,6 +1,6 @@
-package de.deroq.bot.models.configs;
+package de.deroq.bot.config.models;
 
-import de.deroq.bot.models.Config;
+import de.deroq.bot.config.Config;
 
 import java.io.File;
 
