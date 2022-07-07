@@ -15,6 +15,7 @@ public class PacketListener implements ProtocolPacketListener {
 
     @Override
     public void onPacketReceive(Packet packet) {
+        //If the received packet is the MemberVerifyProcessPacket
         if(packet instanceof MemberVerifyProcessPacket) {
             MemberVerifyProcessPacket memberVerifyProcessPacket = (MemberVerifyProcessPacket) packet;
             verifyPlugin.getVerifyCodes().put(memberVerifyProcessPacket.getMemberId(), memberVerifyProcessPacket.getVerifyCode());

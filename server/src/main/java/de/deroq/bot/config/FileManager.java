@@ -6,6 +6,7 @@ import de.deroq.bot.config.models.ChannelsConfig;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,6 +32,7 @@ public class FileManager {
                 FOLDER.mkdirs();
             }
 
+            //If the folder is empty, create files.
             if(FOLDER.isDirectory() && FOLDER.listFiles().length == 0) {
                 createChannelsConfig();
                 createRolesConfig();
@@ -62,7 +64,10 @@ public class FileManager {
             }
         }
 
-        this.rolesConfig = RolesConfig.create(ROLES_FILE, Map.of("Spieler", 1L));
+        Map<String, Long> roles = new HashMap<>();
+        roles.put("Spieler", 1L);
+
+        this.rolesConfig = RolesConfig.create(ROLES_FILE, roles);
         saveConfig(rolesConfig);
     }
 
@@ -76,7 +81,6 @@ public class FileManager {
         }
 
         File configFile = optionalConfigFile.get();
-
         try (FileWriter fileWriter = new FileWriter(configFile)) {
             fileWriter.write(new Gson().toJson(config));
         } catch (IOException e) {

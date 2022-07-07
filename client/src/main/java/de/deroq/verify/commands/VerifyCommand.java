@@ -46,13 +46,14 @@ public class VerifyCommand extends Command {
         }
 
         long memberId = 0;
+        //Goes through all entries and checks if the key is equal to the typed code.
         Optional<Map.Entry<Long, Integer>> entry = verifyPlugin.getVerifyCodes().entrySet()
                 .stream()
                 .filter(longIntegerEntry -> verifyPlugin.getVerifyCodes().get(longIntegerEntry.getKey()) == code)
                 .findFirst();
 
         if(!entry.isPresent()) {
-            player.sendMessage(Constants.PREFIX + "Bitte gib deinen Code an");
+            player.sendMessage(Constants.PREFIX + "Diesen Code gibt es nicht");
             return true;
         }
 

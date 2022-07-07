@@ -16,7 +16,7 @@ public class PacketChannelHandler extends SimpleChannelInboundHandler<Packet> {
     }
 
     /**
-     * Triggers when the channel gets activated.
+     * Triggers when the channel gets active.
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) {

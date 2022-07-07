@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.entities.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 
 public class TimeoutCommand extends ModuleCommand {

@@ -9,15 +9,27 @@ import java.util.Optional;
 
 public abstract class ModuleCommand {
 
-    private final String NAME;
+    private final String name;
 
     public ModuleCommand(String name) {
-        this.NAME = name;
+        this.name = name;
     }
 
+    /**
+     * Executes a module command.
+     *
+     * @param guild Guild of the bot, guild is like a  synonym for server.
+     * @param member The member who typed the command.
+     * @param channel The channel where the command got typed.
+     * @param mentionedMember An optional member who got mentioned in the command.
+     * @param args The arguments of the typed command.
+     */
     public abstract void executeCommand(Guild guild, Member member, MessageChannel channel, Optional<Member> mentionedMember, String[] args);
 
+    /**
+     * @return the command name.
+     */
     public String getName() {
-        return NAME;
+        return name;
     }
 }

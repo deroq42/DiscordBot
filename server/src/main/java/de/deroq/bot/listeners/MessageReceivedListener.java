@@ -22,6 +22,7 @@ public class MessageReceivedListener extends ListenerAdapter {
         Message message = event.getMessage();
         String messageAsString = event.getMessage().getContentStripped();
 
+        //If the message does not start with the command prefix '!', return.
         if(!messageAsString.startsWith(Constants.COMMAND_PREFIX)) {
             return;
         }

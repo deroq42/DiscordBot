@@ -7,7 +7,6 @@ import de.deroq.bot.listeners.MessageReceivedListener;
 import de.deroq.bot.listeners.protocol.PacketListener;
 import de.deroq.bot.modules.ModuleManager;
 import de.deroq.bot.models.Bot;
-import de.deroq.bot.models.misc.BotBuilder;
 import de.deroq.bot.modules.fun.FunModule;
 import de.deroq.bot.modules.moderation.ModerationModule;
 import de.deroq.bot.modules.verify.VerifyModule;
@@ -17,6 +16,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class DiscordBot {
 
@@ -40,11 +40,11 @@ public class DiscordBot {
     }
 
     private void initBot() {
-        this.bot = new BotBuilder()
-                .setToken("SECRET")
+        this.bot = new Bot.builder()
+                .setToken("TOP SECRET ;D")
                 .setActivity(Activity.playing("Minecraft"))
-                .setStatus(OnlineStatus.ONLINE)
-                .addListeners(new MessageReceivedListener(this))
+                .setOnlineStatus(OnlineStatus.ONLINE)
+                .setListeners(new MessageReceivedListener(this))
                 .setMemberCachePolicy(MemberCachePolicy.NONE)
                 .setCacheFlags()
                 .setAutoReconnect(true)

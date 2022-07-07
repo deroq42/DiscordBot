@@ -18,6 +18,7 @@ public class VerifyPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         makeInstances();
+        initNetty();
         registerCommands();
 
         getLogger().info("VerifyPlugin has been enabled.");
@@ -31,7 +32,9 @@ public class VerifyPlugin extends JavaPlugin {
     private void makeInstances() {
         this.verifyCodes = new HashMap<>();
         this.clientNettyBootstrap = new ClientNettyBootstrap("localhost", 8000, new PacketListener(this));
+    }
 
+    private void initNetty() {
         new Thread(() -> clientNettyBootstrap.run()).start();
     }
 

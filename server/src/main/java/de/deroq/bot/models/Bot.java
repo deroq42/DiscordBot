@@ -10,30 +10,39 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 public class Bot {
 
     private JDA jda;
-    private String token;
-    private Activity activity;
-    private OnlineStatus onlineStatus;
-    private Collection<EventListener> listeners;
-    private MemberCachePolicy memberCachePolicy;
-    private Collection<CacheFlag> cacheFlags;
-    private boolean autoReconnect;
+    private final String token;
+    private final Activity activity;
+    private final OnlineStatus onlineStatus;
+    private final EventListener[] listeners;
+    private final MemberCachePolicy memberCachePolicy;
+    private final CacheFlag[] cacheFlags;
+    private final boolean autoReconnect;
 
-    public Bot() {
-        this.listeners = new ArrayList<>();
-        this.cacheFlags = new ArrayList<>();
+    private Bot(String token, Activity activity, OnlineStatus onlineStatus, EventListener[] listeners, MemberCachePolicy memberCachePolicy, CacheFlag[] cacheFlags, boolean autoReconnect) {
+        this.token = token;
+        this.activity = activity;
+        this.onlineStatus = onlineStatus;
+        this.listeners = listeners;
+        this.memberCachePolicy = memberCachePolicy;
+        this.cacheFlags = cacheFlags;
+        this.autoReconnect = autoReconnect;
     }
 
+    /**
+     * Stats the bot.
+     */
     public void run() {
         JDABuilder jdaBuilder = JDABuilder.createDefault(token)
                 .setActivity(activity)
                 .setStatus(onlineStatus)
                 .setMemberCachePolicy(memberCachePolicy)
-                .enableCache(cacheFlags)
+                .enableCache(Arrays.asList(cacheFlags))
                 .setAutoReconnect(autoReconnect);
 
         try {
@@ -42,12 +51,16 @@ public class Bot {
             e.printStackTrace();
         }
 
-        listeners.forEach(eventListener -> jda.getEventManager().register(eventListener));
+
+        Arrays.asList(listeners).forEach(eventListener -> jda.getEventManager().register(eventListener));
         System.out.println("Bot has been started.");
     }
 
+    /**
+     * Stops the bot.
+     */
     public void stop() {
-        if(jda != null) {
+        if (jda != null) {
             jda.shutdown();
             System.out.println("Bot has been shutdown.");
             System.exit(0);
@@ -62,55 +75,77 @@ public class Bot {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public Activity getActivity() {
         return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
     }
 
     public OnlineStatus getOnlineStatus() {
         return onlineStatus;
     }
 
-    public void setOnlineStatus(OnlineStatus onlineStatus) {
-        this.onlineStatus = onlineStatus;
-    }
-
-    public Collection<EventListener> getListeners() {
+    public EventListener[] getListeners() {
         return listeners;
-    }
-
-    public void setListeners(Collection<EventListener> listeners) {
-        this.listeners = listeners;
     }
 
     public MemberCachePolicy getMemberCachePolicy() {
         return memberCachePolicy;
     }
 
-    public void setMemberCachePolicy(MemberCachePolicy memberCachePolicy) {
-        this.memberCachePolicy = memberCachePolicy;
-    }
-
-    public Collection<CacheFlag> getCacheFlags() {
+    public CacheFlag[] getCacheFlags() {
         return cacheFlags;
-    }
-
-    public void setCacheFlags(Collection<CacheFlag> cacheFlags) {
-        this.cacheFlags = cacheFlags;
     }
 
     public boolean isAutoReconnect() {
         return autoReconnect;
     }
 
-    public void setAutoReconnect(boolean autoReconnect) {
-        this.autoReconnect = autoReconnect;
+    public static class builder {
+
+        private String token;
+        private Activity activity;
+        private OnlineStatus onlineStatus;
+        private EventListener[] listeners;
+        private MemberCachePolicy memberCachePolicy;
+        private CacheFlag[] cacheFlags;
+        private boolean autoReconnect;
+
+        public builder setToken(String token) {
+            this.token = token;
+            return this;
+        }
+
+        public builder setActivity(Activity activity) {
+            this.activity = activity;
+            return this;
+        }
+
+        public builder setOnlineStatus(OnlineStatus onlineStatus) {
+            this.onlineStatus = onlineStatus;
+            return this;
+        }
+
+        public builder setListeners(EventListener... listeners) {
+            this.listeners = listeners;
+            return this;
+        }
+
+        public builder setMemberCachePolicy(MemberCachePolicy memberCachePolicy) {
+            this.memberCachePolicy = memberCachePolicy;
+            return this;
+        }
+
+        public builder setCacheFlags(CacheFlag... cacheFlags) {
+            this.cacheFlags = cacheFlags;
+            return this;
+        }
+
+        public builder setAutoReconnect(boolean autoReconnect) {
+            this.autoReconnect = autoReconnect;
+            return this;
+        }
+
+        public Bot build() {
+            return new Bot(token, activity, onlineStatus, listeners, memberCachePolicy, cacheFlags, autoReconnect);
+        }
     }
 }
